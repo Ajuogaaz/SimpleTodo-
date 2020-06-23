@@ -28,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         etItem = findViewById(R.id.etItem);
         rvItems = findViewById(R.id.rvitems);
 
-
-
         items = new ArrayList<>();
         items.add("Buy Milk");
         items.add("Go to the gym");
