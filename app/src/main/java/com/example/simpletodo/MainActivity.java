@@ -64,7 +64,15 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        itemsAdapter = new ItemsAdapter(items, onLongClickListener);
+        ItemsAdapter.OnclickListener onclickListener =
+                new ItemsAdapter.OnclickListener() {
+                    @Override
+                    public void onItemClicked(int position) {
+                        Log.d("MainActivity", "we got in");
+                    }
+                };
+
+        itemsAdapter = new ItemsAdapter(items, onLongClickListener, onclickListener);
         rvItems.setAdapter(itemsAdapter);
         rvItems.setLayoutManager(new LinearLayoutManager(this));
 
