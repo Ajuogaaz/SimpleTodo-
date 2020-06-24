@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,9 +37,28 @@ public class MainActivity extends AppCompatActivity {
         items.add("Have fun");
 
 
-        ItemsAdapter itemsAdapter = new ItemsAdapter(items);
+        final ItemsAdapter itemsAdapter = new ItemsAdapter(items);
         rvItems.setAdapter(itemsAdapter);
         rvItems.setLayoutManager(new LinearLayoutManager(this));
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String todoItem = etItem.getText().toString();
+
+                //Add item to the model
+                items.add(todoItem);
+
+                //notify adapter that an item i inserted
+                itemsAdapter.notifyItemInserted(items.size()-1);
+
+                etItem.setText("");
+
+                Toast.makeText( getApplicationContext() ,
+                        "Items was added",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }
