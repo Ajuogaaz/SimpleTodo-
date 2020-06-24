@@ -42,10 +42,8 @@ public class MainActivity extends AppCompatActivity {
         etItem = findViewById(R.id.etItem);
         rvItems = findViewById(R.id.rvitems);
 
-        items = new ArrayList<>();
-        items.add("Buy Milk");
-        items.add("Go to the gym");
-        items.add("Have fun");
+
+        loadItems();
 
 
         ItemsAdapter.OnLongClickListener onLongClickListener =
@@ -60,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),
                         "Item was removed",
                         Toast.LENGTH_SHORT).show();
+
+                saveItems();
 
             }
         };
@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText( getApplicationContext() ,
                         "Items was added",
                         Toast.LENGTH_SHORT).show();
+                saveItems();
             }
         });
 
@@ -101,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             items = new ArrayList<>();
         }
     }
-    public void SaveItems(){
+    private void saveItems(){
         try {
             FileUtils.writeLines(getDataFile(), items);
         } catch (IOException e) {
