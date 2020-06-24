@@ -5,13 +5,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import org.apache.commons.io.FileUtils;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,4 +88,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    private File getDataFile(){
+        return new File(getFilesDir(), "data.txt");
+        
+    }
+    /* This function will load items by reading every line of our File */
+    private void loadItems(){
+        try {
+            items = new ArrayList<String>(FileUtils.readLines(getDataFile(), Charset.defaultCharset()));
+        } catch (IOException e) {
+            Log.e("Main Activity", "error reading items", e);
+            items = new ArrayList<>();
+        }
+    }
+    public void SaveItems(){
+        try {
+            FileUtils.writeLines(getDataFile(), items);
+        } catch (IOException e) {
+            Log.e("Main Activity", "error reading items", e);
+        }
+    }
+    
+    
+    //This function wil save file\\\
+    
 }
